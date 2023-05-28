@@ -1,0 +1,1 @@
+D:\new\company_project\order\order-common\build\classes\kotlin\main\uz\uztelecom\order-common\model\OrderFactory.class;D:\new\company_project\order\order-common\build\classes\kotlin\main\uz\uztelecom\order-common\model\OrderService.class

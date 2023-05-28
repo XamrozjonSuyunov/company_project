@@ -1,0 +1,29 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.6.10'
+    id 'application'
+}
+
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    implementation 'io.activej:activej-launchers-http:5.4.3'
+    implementation "com.google.code.gson:gson:2.10.1"
+    implementation "org.slf4j:slf4j-api:2.0.6"
+    implementation "org.slf4j:slf4j-simple:2.0.6"
+    implementation project(":common")
+    implementation project(":order-common")
+    implementation project(":user-service")
+    implementation project(":user-common")
+}
+
+application {
+    mainClassName = 'Main'
+}
+
+task prepareKotlinBuildScriptModel {
+
+}

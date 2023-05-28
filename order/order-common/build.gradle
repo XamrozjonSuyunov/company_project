@@ -1,0 +1,18 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.6.10'
+}
+
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    implementation 'org.postgresql:postgresql:42.6.0'
+    implementation project(":common")
+}
+
+task prepareKotlinBuildScriptModel {
+
+}

@@ -1,0 +1,16 @@
+rootProject.name = 'company_project'
+include 'common'
+include ':order-common'
+include ':order-service'
+include ':user-common'
+include ':user-service'
+
+project(':common').projectDir = file('common')
+project(':order-common').projectDir = file('order/order-common')
+project(':order-service').projectDir = file('order/order-service')
+project(':user-common').projectDir = file('user/user-common')
+project(':user-service').projectDir = file('user/user-service')
+
+
+
+
