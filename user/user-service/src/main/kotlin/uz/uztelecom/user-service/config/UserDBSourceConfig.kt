@@ -7,7 +7,7 @@ import java.sql.SQLException
 class UserDBSourceConfig {
 
     fun connectToDatabase(): Connection? {
-        val url = "jdbc:postgresql://userdb:5432/userdb"
+        val url = "jdbc:postgresql://172.23.0.1:5432/userdb"
         val username = "postgres"
         val password = "root123"
 

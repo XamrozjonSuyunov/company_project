@@ -7,7 +7,7 @@ import java.sql.SQLException
 class OrderDBSourceConfig {
 
     fun connectToDatabase(): Connection? {
-        val url = "jdbc:postgresql://orderdb:5434/orderdb"
+        val url = "jdbc:postgresql://172.23.0.1:5434/orderdb"
         val username = "postgres"
         val password = "root123"
 
