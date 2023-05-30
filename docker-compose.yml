@@ -1,0 +1,65 @@
+version: "3.9"
+
+services:
+  user-service:
+    container_name: user-service
+    image: user-service
+    build:
+      context: .
+      dockerfile: dockerfiles/user-service.Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - userdb
+    links:
+      - userdb:userdb
+
+  order-service:
+    container_name: order-service
+    image: order-service
+    build:
+      context: .
+      dockerfile: dockerfiles/order-service.Dockerfile
+    user: root
+    ports:
+      - "8081:8080"
+    depends_on:
+      - user-service
+      - orderdb
+    links:
+      - orderdb:orderdb
+
+  userdb:
+    container_name: userdb
+    image: postgres:13
+    build:
+      context: .
+      dockerfile: dockerfiles/userdb.Dockerfile
+    restart: always
+    volumes:
+      - ./init_user.sql:/docker-entrypoint-initdb.d/init_user.sql
+    ports:
+      - "5432:5432"
+    environment:
+      PGDATA: /var/lib/postgresql/data/psql
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root123
+      POSTGRES_DB: userdb
+
+  orderdb:
+    container_name: orderdb
+    image: postgres:13
+    build:
+      context: .
+      dockerfile: dockerfiles/orderdb.Dockerfile
+    restart: always
+    volumes:
+      - ./init_order.sql:/docker-entrypoint-initdb.d/init_order.sql
+    expose:
+      - "5434"
+    ports:
+      - "5434:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root123
+      POSTGRES_DB: orderdb

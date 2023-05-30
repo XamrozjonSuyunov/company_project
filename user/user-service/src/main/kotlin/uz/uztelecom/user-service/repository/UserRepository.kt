@@ -8,7 +8,7 @@ class UserRepository(private val userDbSourceConfig: UserDBSourceConfig) {
     fun findById(userId: String): UserDTO? {
         val connection = userDbSourceConfig.connectToDatabase()
         var userDTO: UserDTO? = null;
-
+        println(connection)
         if (connection != null) {
             val statement = connection.createStatement()
             val query = "select * from users where id='$userId'"

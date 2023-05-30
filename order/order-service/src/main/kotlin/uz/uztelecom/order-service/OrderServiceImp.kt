@@ -13,7 +13,7 @@ class OrderServiceImp(
 ) : OrderService {
 
     override fun createOrder(userId: String, order: OrderDTO): OrderResponseDTO? {
-        val userDTO: UserDTO? = userService?.getCustomerInfo(userId)
+        val userDTO: UserDTO? = userService.getCustomerInfo(userId)
 
         if (userDTO != null) {
             val orderDTO: OrderDTO = OrderDTO(order.productId, order.quantity)

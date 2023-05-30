@@ -9,7 +9,7 @@ class UserServiceImp(
 ) : UserService {
 
     override fun getCustomerInfo(userId: String): UserDTO? {
-        val userDTO: UserDTO? = userRepository?.findById(userId);
+        val userDTO: UserDTO? = userRepository.findById(userId);
 
         return userDTO
     }

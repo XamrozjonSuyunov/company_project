@@ -1,6 +1,6 @@
 plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.6.10'
-    id 'application'
+    id 'com.github.johnrengelman.shadow' version '7.0.0'
 }
 
 
@@ -10,18 +10,26 @@ repositories {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib"
     implementation 'io.activej:activej-launchers-http:5.4.3'
     implementation "com.google.code.gson:gson:2.10.1"
     implementation "org.slf4j:slf4j-api:2.0.6"
     implementation "org.slf4j:slf4j-simple:2.0.6"
+    implementation 'org.postgresql:postgresql:42.6.0'
     implementation project(":common")
     implementation project(":user-common")
 }
 
-application {
-    // Define the main class for the application.
-    mainClassName = 'Main'
+jar {
+    manifest {
+        attributes(
+                'Main-Class': ' uz.uztelecom.MainKt',
+                'Multi-Release': 'true'
+        )
+    }
+
+    duplicatesStrategy = 'exclude'
+
+    from { configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
 }
 
 task prepareKotlinBuildScriptModel {
