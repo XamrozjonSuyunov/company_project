@@ -1,8 +1,11 @@
 package uz.uztelecom
 
-import uz.uztelecom.`user-service`.UserLauncher
+import org.springframework.boot.SpringApplication
+import org.springframework.boot.autoconfigure.SpringBootApplication
+
+@SpringBootApplication
+open class Main
 
 fun main(args: Array<String>) {
-    val launcher = UserLauncher()
-    launcher.launch(args)
+    SpringApplication.run(Main::class.java, *args)
 }

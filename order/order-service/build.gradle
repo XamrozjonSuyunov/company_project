@@ -1,8 +1,10 @@
 plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.6.10'
     id 'com.github.johnrengelman.shadow' version '7.0.0'
+    id 'org.springframework.boot' version '2.1.3.RELEASE'
 }
 
+apply plugin: 'io.spring.dependency-management'
 
 repositories {
     mavenCentral()
@@ -15,10 +17,16 @@ dependencies {
     implementation "org.slf4j:slf4j-api:2.0.6"
     implementation "org.slf4j:slf4j-simple:2.0.6"
     implementation 'org.postgresql:postgresql:42.6.0'
+    implementation 'org.apache.logging.log4j:log4j-core:2.20.0'
+    implementation 'org.apache.logging.log4j:log4j-api:2.20.0'
     implementation project(":common")
     implementation project(":order-common")
     implementation project(":user-service")
     implementation project(":user-common")
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'com.github.briandilley.jsonrpc4j:jsonrpc4j:1.6'
+    implementation 'javax.jws:javax.jws-api:1.1'
 }
 
 jar {

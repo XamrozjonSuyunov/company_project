@@ -1,8 +1,11 @@
 package uz.uztelecom
 
-import uz.uztelecom.`order-service`.OrderLauncher
+import org.springframework.boot.SpringApplication
+import org.springframework.boot.autoconfigure.SpringBootApplication
+
+@SpringBootApplication
+open class Main
 
 fun main(args: Array<String>) {
-    val launcher = OrderLauncher()
-    launcher.launch(args)
+    SpringApplication.run(Main::class.java, *args)
 }

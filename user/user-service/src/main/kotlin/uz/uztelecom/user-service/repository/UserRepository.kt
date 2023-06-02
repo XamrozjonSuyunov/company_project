@@ -1,9 +1,11 @@
 package uz.uztelecom.`user-service`.repository
 
+import org.apache.logging.log4j.LogManager
 import uz.uztelecom.`user-service`.config.UserDBSourceConfig
 import uz.uztelecom.common.model.UserDTO
 
 class UserRepository(private val userDbSourceConfig: UserDBSourceConfig) {
+    private val logger = LogManager.getLogger()
 
     fun findById(userId: String): UserDTO? {
         val connection = userDbSourceConfig.connectToDatabase()
@@ -30,6 +32,7 @@ class UserRepository(private val userDbSourceConfig: UserDBSourceConfig) {
 
             return userDTO;
         } else {
+            logger.error("Failed to establish a database connection.")
             return userDTO;
         }
     }

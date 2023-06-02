@@ -9,6 +9,7 @@ repositories {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    implementation 'com.github.briandilley.jsonrpc4j:jsonrpc4j:1.6'
     implementation project(":common")
 }
 

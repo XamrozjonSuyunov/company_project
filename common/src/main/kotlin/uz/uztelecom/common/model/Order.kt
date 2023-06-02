@@ -12,5 +12,6 @@ data class OrderResponseDTO(
 
 data class OrderRequestDTO(
     val userId: String,
+    val orderId: String,
     val order: OrderDTO
 )

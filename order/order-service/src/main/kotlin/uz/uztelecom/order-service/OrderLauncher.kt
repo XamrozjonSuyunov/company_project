@@ -42,10 +42,55 @@ class OrderLauncher : HttpServerLauncher() {
                     val orderDTO: OrderDTO = OrderDTO(request.order.productId, request.order.quantity);
                     val userId: String = request.userId
 
-                    val orderResponseDTO: OrderResponseDTO? = orderService?.createOrder(userId, orderDTO)
+                    val orderResponseDTO: OrderResponseDTO? =
+                        orderService?.createOrder(userId, request.order.productId, request.order.quantity)
 
                     HttpResponse.ok200()
                         .withJson(gson.toJson(orderResponseDTO))
+                }
+            }
+            .map(HttpMethod.PUT, "/editOrder") {
+                it.loadBody().map { _ ->
+                    val body = it.body.asString(StandardCharsets.UTF_8)
+                    val request = gson.fromJson(body, OrderRequestDTO::class.java)
+
+                    val orderDTO: OrderDTO = OrderDTO(request.order.productId, request.order.quantity);
+                    val orderId: String = request.orderId
+
+                    val orderResponseDTO: OrderResponseDTO? =
+                        orderService?.editOrder(orderId, request.order.productId, request.order.quantity)
+
+                    HttpResponse.ok200()
+                        .withJson(gson.toJson(orderResponseDTO))
+                }
+            }
+            .map(HttpMethod.DELETE, "/orderList/:orderId") {
+                it.loadBody().map { _ ->
+                    val orderId: String = it.getPathParameter("orderId")
+
+                    val orderResponseDTO: OrderResponseDTO? = orderService?.deleteOrder(orderId)
+
+                    HttpResponse.ok200()
+                        .withJson(gson.toJson(orderResponseDTO))
+                }
+            }
+            .map(HttpMethod.GET, "/orderList/:orderId") {
+                it.loadBody().map { _ ->
+                    val orderId: String = it.getPathParameter("orderId")
+
+                    val orderResponseDTO: OrderDTO? = orderService?.getOrder(orderId)
+
+                    HttpResponse.ok200()
+                        .withJson(gson.toJson(orderResponseDTO))
+                }
+            }
+            .map(HttpMethod.GET, "/orderList") {
+                it.loadBody().map { _ ->
+
+                    val orderDTOList: List<OrderDTO>?? = orderService?.orderList()
+
+                    HttpResponse.ok200()
+                        .withJson(gson.toJson(orderDTOList))
                 }
             }
     }

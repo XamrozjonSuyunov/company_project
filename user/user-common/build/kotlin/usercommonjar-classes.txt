@@ -1,1 +1,1 @@
-D:\new\company_project\user\user-common\build\classes\kotlin\main\uz\uztelecom\user-common\model\UserCommonFactory.class;D:\new\company_project\user\user-common\build\classes\kotlin\main\uz\uztelecom\user-common\model\UserService.class
+D:\new\company_project\user\user-common\build\classes\kotlin\main\uz\uztelecom\user-common\model\UserService.class
