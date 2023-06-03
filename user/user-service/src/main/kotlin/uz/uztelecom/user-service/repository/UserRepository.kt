@@ -4,9 +4,10 @@ import org.apache.logging.log4j.LogManager
 import uz.uztelecom.`user-service`.config.UserDBSourceConfig
 import uz.uztelecom.common.model.UserDTO
 
-class UserRepository(private val userDbSourceConfig: UserDBSourceConfig) {
+class UserRepository {
     private val logger = LogManager.getLogger()
 
+    private val userDbSourceConfig: UserDBSourceConfig = UserDBSourceConfig();
     fun findById(userId: String): UserDTO? {
         val connection = userDbSourceConfig.connectToDatabase()
         var userDTO: UserDTO? = null;

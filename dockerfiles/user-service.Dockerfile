@@ -1,5 +1,5 @@
-FROM eclipse-temurin:17-jre
+FROM eclipse-temurin:11-jre
 
-COPY user/user-service/build/libs/user-service.jar .
+COPY user/user-service/build/libs/*.jar app.jar
 
-ENTRYPOINT ["java", "-jar", "user-service.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]

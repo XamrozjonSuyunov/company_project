@@ -3,23 +3,23 @@ package uz.uztelecom.`user-service`.config
 import com.googlecode.jsonrpc4j.JsonRpcServer
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.stereotype.Component
 import org.springframework.web.servlet.DispatcherServlet
 import org.springframework.web.servlet.HandlerAdapter
 import org.springframework.web.servlet.ModelAndView
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 import uz.uztelecom.`user-common`.model.UserService
 import uz.uztelecom.`user-service`.UserServiceImp
-import uz.uztelecom.`user-service`.repository.UserRepository
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
 
-@Configuration
-open class UserJsonRpcConfig : WebMvcConfigurerAdapter() {
+@Component
+open class UserRpcConfig : WebMvcConfigurer {
     @Bean
     open fun userService(): UserService? {
-        return UserServiceImp(UserRepository(UserDBSourceConfig()))
+        return UserServiceImp()
     }
 
     @Bean
@@ -42,7 +42,7 @@ open class UserJsonRpcConfig : WebMvcConfigurerAdapter() {
             ): ModelAndView? {
                 // Process the JSON-RPC request using jsonrpc4j library
                 val jsonRpcServer =
-                    JsonRpcServer(UserServiceImp(UserRepository(UserDBSourceConfig())), UserService::class.java)
+                    JsonRpcServer(UserServiceImp(), UserService::class.java)
                 jsonRpcServer.handle(request, response)
                 return null
             }

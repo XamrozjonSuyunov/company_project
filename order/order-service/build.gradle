@@ -21,8 +21,6 @@ dependencies {
     implementation 'org.apache.logging.log4j:log4j-api:2.20.0'
     implementation project(":common")
     implementation project(":order-common")
-    implementation project(":user-service")
-    implementation project(":user-common")
 
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'com.github.briandilley.jsonrpc4j:jsonrpc4j:1.6'

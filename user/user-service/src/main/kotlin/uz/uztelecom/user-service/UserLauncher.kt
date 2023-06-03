@@ -19,7 +19,7 @@ class UserLauncher : HttpServerLauncher() {
     private val userService: UserServiceImp? = null
 
     @Provides
-    fun userService(): UserServiceImp = UserServiceImp(UserRepository(UserDBSourceConfig()))
+    fun userService(): UserServiceImp = UserServiceImp()
 
     @Provides
     fun servlet(): AsyncServlet {

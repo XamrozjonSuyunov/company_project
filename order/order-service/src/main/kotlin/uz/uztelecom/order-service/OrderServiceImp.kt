@@ -2,20 +2,22 @@ package uz.uztelecom.`order-service`
 
 import org.apache.logging.log4j.LogManager
 import uz.uztelecom.`order-common`.model.OrderService
+import uz.uztelecom.`order-service`.config.OrderJsonRpcClient
+import uz.uztelecom.`order-service`.config.OrderDBSourceConfig
 import uz.uztelecom.`order-service`.repository.OrderRepository
-import uz.uztelecom.`user-common`.model.UserService
 import uz.uztelecom.common.model.OrderDTO
 import uz.uztelecom.common.model.OrderResponseDTO
-import uz.uztelecom.common.model.UserDTO
 
-class OrderServiceImp(
-    private val orderRepository: OrderRepository,
-    private val userService: UserService
-) : OrderService {
+class OrderServiceImp : OrderService {
+
+    private val orderRepository: OrderRepository = OrderRepository(OrderDBSourceConfig())
     private val logger = LogManager.getLogger()
+    private val jsonRpcClient = OrderJsonRpcClient()
 
     override fun createOrder(userId: String, productId: String, quantity: Int): OrderResponseDTO? {
-        val userDTO: UserDTO? = userService.getCustomerInfo(userId)
+        val userDTO = jsonRpcClient.getUser(userId)
+
+//        val userDTO: UserDTO? = userService.getCustomerInfo(userId)
 
         if (userDTO != null) {
             val orderDTO: OrderDTO = OrderDTO(productId, quantity)
@@ -33,8 +35,8 @@ class OrderServiceImp(
         val orderDTO: OrderDTO? = orderRepository.getOrder(orderId)
 
         if (orderDTO != null) {
-            val orderDTO: OrderDTO = OrderDTO(productId, quantity)
-            val orderResponseDTO: OrderResponseDTO? = orderRepository.editOrder(orderId, orderDTO)
+            val order = OrderDTO(productId, quantity)
+            val orderResponseDTO: OrderResponseDTO? = orderRepository.editOrder(orderId, order)
 
             return orderResponseDTO
         }

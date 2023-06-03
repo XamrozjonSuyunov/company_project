@@ -8,12 +8,6 @@ import io.activej.http.RoutingServlet
 import io.activej.inject.annotation.Inject
 import io.activej.inject.annotation.Provides
 import io.activej.launchers.http.HttpServerLauncher
-import uz.uztelecom.`order-service`.config.OrderDBSourceConfig
-import uz.uztelecom.`order-service`.repository.OrderRepository
-import uz.uztelecom.`user-common`.model.UserService
-import uz.uztelecom.`user-service`.UserServiceImp
-import uz.uztelecom.`user-service`.config.UserDBSourceConfig
-import uz.uztelecom.`user-service`.repository.UserRepository
 import uz.uztelecom.common.model.OrderDTO
 import uz.uztelecom.common.model.OrderRequestDTO
 import uz.uztelecom.common.model.OrderResponseDTO
@@ -25,11 +19,11 @@ class OrderLauncher : HttpServerLauncher() {
     @Inject
     private val orderService: OrderServiceImp? = null
 
-    @Provides
-    fun userService(): UserService = UserServiceImp(UserRepository(UserDBSourceConfig()))
+//    @Provides
+//    fun userService(): UserService = UserServiceImp(UserRepository(UserDBSourceConfig()))
 
-    @Provides
-    fun orderService(): OrderServiceImp = OrderServiceImp(OrderRepository(OrderDBSourceConfig()), userService())
+//    @Provides
+//    fun orderService(): OrderServiceImp = OrderServiceImp(OrderRepository(OrderDBSourceConfig()), userService())
 
     @Provides
     fun servlet(): AsyncServlet {
@@ -39,7 +33,7 @@ class OrderLauncher : HttpServerLauncher() {
                     val body = it.body.asString(StandardCharsets.UTF_8)
                     val request = gson.fromJson(body, OrderRequestDTO::class.java)
 
-                    val orderDTO: OrderDTO = OrderDTO(request.order.productId, request.order.quantity);
+//                    val orderDTO: OrderDTO = OrderDTO(request.order.productId, request.order.quantity);
                     val userId: String = request.userId
 
                     val orderResponseDTO: OrderResponseDTO? =
@@ -54,7 +48,7 @@ class OrderLauncher : HttpServerLauncher() {
                     val body = it.body.asString(StandardCharsets.UTF_8)
                     val request = gson.fromJson(body, OrderRequestDTO::class.java)
 
-                    val orderDTO: OrderDTO = OrderDTO(request.order.productId, request.order.quantity);
+//                    val orderDTO: OrderDTO = OrderDTO(request.order.productId, request.order.quantity);
                     val orderId: String = request.orderId
 
                     val orderResponseDTO: OrderResponseDTO? =
@@ -87,7 +81,7 @@ class OrderLauncher : HttpServerLauncher() {
             .map(HttpMethod.GET, "/orderList") {
                 it.loadBody().map { _ ->
 
-                    val orderDTOList: List<OrderDTO>?? = orderService?.orderList()
+                    val orderDTOList: List<OrderDTO>? = orderService?.orderList()
 
                     HttpResponse.ok200()
                         .withJson(gson.toJson(orderDTOList))

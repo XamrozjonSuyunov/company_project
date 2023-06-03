@@ -1,6 +1,9 @@
 package uz.uztelecom.`order-service`.config
 
 import org.apache.logging.log4j.LogManager
+import org.springframework.boot.autoconfigure.jdbc.JdbcProperties
+import org.springframework.boot.context.properties.ConfigurationProperties
+import org.springframework.stereotype.Component
 import java.io.FileInputStream
 import java.sql.Connection
 import java.sql.DriverManager
@@ -13,7 +16,7 @@ class OrderDBSourceConfig {
     fun connectToDatabase(): Connection? {
         val properties = Properties()
 
-        val filePath = "D:\\new\\company_project\\order\\order-service\\src\\main\\resources\\default-config.properties"
+        val filePath = "D:\\company_project\\order\\order-service\\src\\main\\resources\\application.properties"
 
         // Load the properties file
         val configFile = FileInputStream(filePath)
@@ -25,7 +28,7 @@ class OrderDBSourceConfig {
         val username = properties.getProperty("username")
         val password = properties.getProperty("password")
 
-//        val url = "jdbc:postgresql://localhost:5433/orderdb"
+//        val url = "jdbc:postgresql://172.23.0.1:5434/orderdb"
 //        val username = "postgres"
 //        val password = "root123"
 

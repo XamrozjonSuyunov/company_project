@@ -1,6 +1,8 @@
 package uz.uztelecom.`user-service`.config
 
 import org.apache.logging.log4j.LogManager
+import org.springframework.beans.factory.annotation.Value
+import org.springframework.stereotype.Component
 import java.io.FileInputStream
 import java.sql.Connection
 import java.sql.DriverManager
@@ -13,7 +15,7 @@ class UserDBSourceConfig {
     fun connectToDatabase(): Connection? {
         val properties = Properties()
 
-        val filePath = "D:\\new\\company_project\\user\\user-service\\src\\main\\resources\\default-config.properties"
+        val filePath = "D:\\company_project\\user\\user-service\\src\\main\\resources\\application.properties"
         // Load the properties file
         val configFile = FileInputStream(filePath)
         properties.load(configFile)
@@ -24,7 +26,7 @@ class UserDBSourceConfig {
         val username = properties.getProperty("username")
         val password = properties.getProperty("password")
 
-//        val url = "jdbc:postgresql://localhost:5433/userdb"
+//        val url = "jdbc:postgresql://172.23.0.1:5432/userdb"
 //        val username = "postgres"
 //        val password = "root123"
 

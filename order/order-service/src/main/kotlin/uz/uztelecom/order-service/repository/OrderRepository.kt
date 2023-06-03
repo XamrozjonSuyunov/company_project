@@ -39,12 +39,12 @@ class OrderRepository(
     fun editOrder(orderId: String, orderDTO: OrderDTO): OrderResponseDTO {
         val connection = orderDbSourceConfig.connectToDatabase()
         if (connection != null) {
-            val productId: String = orderDTO.productId
-            val quantity: Int = orderDTO.quantity
+//            val productId: String = orderDTO.productId
+//            val quantity: Int = orderDTO.quantity
 
             val insertQuery = "update orders set product_id=?, quantity=? where id=?"
             val preparedStatement = connection.prepareStatement(insertQuery)
-            val random: Int = (Math.random() * 100000).toInt()
+//            val random: Int = (Math.random() * 100000).toInt()
 
             preparedStatement.setString(1, "${orderDTO.productId}")
             preparedStatement.setInt(2, "${orderDTO.quantity}".toInt())
@@ -64,10 +64,9 @@ class OrderRepository(
 
     fun deleteOrder(orderId: String): OrderResponseDTO {
         val connection = orderDbSourceConfig.connectToDatabase()
-        var orderDTO: OrderDTO? = null;
         println(connection)
         if (connection != null) {
-            val statement = connection.createStatement()
+//            val statement = connection.createStatement()
             val query = "DELETE FROM orders WHERE id = ?"
 //            statement.executeUpdate(query)
             val preparedStatement = connection.prepareStatement(query)
@@ -94,10 +93,10 @@ class OrderRepository(
             val resultSet = statement.executeQuery(query)
 
             while (resultSet.next()) {
-                val id = resultSet.getString("id")
+//                val id = resultSet.getString("id")
                 val productId = resultSet.getString("product_id")
                 val quantity = resultSet.getInt("quantity")
-                val userId = resultSet.getString("user_id")
+//                val userId = resultSet.getString("user_id")
                 // Process the data as needed
 //                println("ID: $id, Name: $name, Phone: $phone")
 
@@ -124,10 +123,10 @@ class OrderRepository(
             val query = "select * from orders"
             val resultSet = statement.executeQuery(query)
             while (resultSet.next()) {
-                val id = resultSet.getString("id")
+//                val id = resultSet.getString("id")
                 val productId = resultSet.getString("product_id")
                 val quantity = resultSet.getInt("quantity")
-                val userId = resultSet.getString("user_id")
+//                val userId = resultSet.getString("user_id")
                 // Process the data as needed
 //                println("ID: $id, Name: $name, Phone: $phone")
 
